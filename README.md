@@ -1,0 +1,3 @@
+# Projecte3_BT
+
+Creació d’una aplicació PER UNA EMPRESA QUE ES DEDICA A LLOGAR ESQUÍS I CURSOS D'ESQUÍ
