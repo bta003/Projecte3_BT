@@ -156,7 +156,7 @@ public class EskyDAM extends Application {
                     rb2.setSelected(false);
                     rb3.setSelected(false);
                     rb4.setSelected(false);
-                } 
+                }
             }
         });
 
@@ -168,10 +168,10 @@ public class EskyDAM extends Application {
                     rb1.setSelected(false);
                     rb3.setSelected(false);
                     rb4.setSelected(false);
-                } 
+                }
             }
         });
-        
+
         rb3.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
@@ -180,10 +180,10 @@ public class EskyDAM extends Application {
                     rb1.setSelected(false);
                     rb2.setSelected(false);
                     rb4.setSelected(false);
-                } 
+                }
             }
         });
-        
+
         rb4.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
@@ -192,12 +192,10 @@ public class EskyDAM extends Application {
                     rb1.setSelected(false);
                     rb2.setSelected(false);
                     rb3.setSelected(false);
-                } 
+                }
             }
         });
 
-        
-        
         gp.getChildren().addAll(rb1, rb2, rb3, rb4);
 
         return gp;
@@ -287,16 +285,28 @@ public class EskyDAM extends Application {
             int idcurs = Integer.parseInt(txtCliCursID.getText());
             String dniclient = txtCliDni.getText();
             int nhores = Integer.parseInt(numhores);
-            
+
             String myDriver = "com.mysql.cj.jdbc.Driver";
             String myUrl = "jdbc:mysql://localhost:3306/esqui";
             Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, "root", "Contrasenya");
+            Connection conn = DriverManager.getConnection(myUrl, "root", "Fat/3232");
 
             Statement st = conn.createStatement();
 
-            // note that i'm leaving "date_created" out of this insert statement
-            st.executeUpdate("call llogarCurs('" + idcurs + "','" + dniclient + "','"+ nhores +"')");
+    
+            /*Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Federats where dni='" + dniclient + "')");
+            ResultSet rs2 = stmt.executeQuery("SELECT * FROM Competicio where ID_curs=" + idcurs + ")");
+            if (rs.next() && rs2.next()) {
+                rs.beforeFirst();
+
+            } else {
+                System.out.println("Obtained ResultSet object is empty");
+            }
+            */
+            
+            st.executeUpdate("call llogarCurs('" + idcurs + "','" + dniclient + "','" + nhores + "')");
+
 
             conn.close();
         } catch (Exception e) {
@@ -334,7 +344,7 @@ public class EskyDAM extends Application {
     }
 
     private Pane cursosColectius() throws Exception {
-        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "Contrasenya");
+        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "Fat/3232");
 
         VBox vb = new VBox();
         TableView<CursColectiu> tblCursos = new TableView<>();
@@ -370,7 +380,7 @@ public class EskyDAM extends Application {
     }
 
     private Pane cursosCompeticio() throws Exception {
-        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "Contrasenya");
+        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "Fat/3232");
 
         VBox vb = new VBox();
         TableView<CursCompeticio> tblCursos = new TableView<>();
@@ -410,7 +420,7 @@ public class EskyDAM extends Application {
     }
 
     private Pane cursosIndividuals() throws Exception {
-        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "Contrasenya");
+        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "Fat/3232");
 
         VBox vb = new VBox();
         TableView<CursIndividual> tblCursos = new TableView<>();
@@ -446,7 +456,7 @@ public class EskyDAM extends Application {
     }
 
     private Pane partEsquerra() throws Exception {
-        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "Contrasenya");
+        Connexio con = new Connexio("com.mysql.cj.jdbc.Driver", "jdbc:mysql://localhost:3306/esqui", "root", "Fat/3232");
         VBox vLateral = new VBox();
         Label lblClient = new Label("Clients");
         lblClient.setFont(new Font(30));
